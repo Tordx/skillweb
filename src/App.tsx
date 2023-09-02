@@ -3,8 +3,10 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom
 import './App.css';
 import { AuthContext } from 'auth';
 import { Children } from 'types/interfaces';
-import Home from 'screens/home/home';
+import Home from 'screens/home/dashboard';
 import Login from 'screens/partials/auth';
+import Statistics from 'screens/home/statistics';
+import Credentials from 'screens/home/credentials';
 
 
 const App: React.FC = () => {
@@ -25,7 +27,9 @@ const App: React.FC = () => {
           <Route index element = {<Login/>}/>
         </Route>
         <Route path = "admin">
-         <Route  path="home" index element={ <ProtectedRoute><Home/></ProtectedRoute>}/>
+          <Route  path="dashboard" index element={ <ProtectedRoute><Home/></ProtectedRoute>}/>
+          <Route  path="statistics" index element={ <ProtectedRoute><Statistics/></ProtectedRoute>}/>
+          <Route  path="credentials" index element={ <ProtectedRoute><Credentials/></ProtectedRoute>}/>
         </Route>
       </Routes>
     </BrowserRouter>
