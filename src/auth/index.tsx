@@ -8,6 +8,7 @@ type User = {
   uid: string;
   displayName: string | null;
   email: string | null;
+  photoURL: string | null | undefined;
 };
 
 type AuthContextType = {
@@ -29,8 +30,8 @@ export const AuthContextProvider: React.FC<Children> = ({ children }) => {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
-        const { uid, displayName, email } = user;
-        setCurrentUser({ uid, displayName, email });
+        const { uid, displayName, email, photoURL } = user;
+        setCurrentUser({ uid, displayName, email, photoURL });
       } else {
         setCurrentUser(null);
       }
