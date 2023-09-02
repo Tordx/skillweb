@@ -1,30 +1,35 @@
 import { collection, getDocs } from '@firebase/firestore';
 import { auth, db } from '../../../firebase';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { userdata } from 'types/interfaces';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import '../styles/auth.css'
+import { AuthContext } from 'auth';
 export default function Login({}) {
 
   const [loginemail, setloginEmail] = useState('');
   const [loginpassword, setloginPassword] = useState('');
+  const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate()
-  useEffect(() => {
+    useEffect(() => {
    const getUserData = async () => {
-    try {
+  try {
 
-      const querySnapshot = await getDocs(collection(db, 'user'));
-      querySnapshot.forEach((doc) => {
-      });
-    } catch (error) {
-      console.log(error);
-      console.log('Error getting user documents: ', error);
-    }
+    const querySnapshot = await getDocs(collection(db, 'user'));
+    querySnapshot.forEach((doc: any) => {
+      // console.log(doc.id, ' => ', doc.data());
+    });
+  } catch (error) {
+    console.log(error);
+    console.log('Error getting user documents: ', error);
+  }
 };
 
 getUserData();
-    
+  if(currentUser != null){
+    navigate("/admin/dashboard");
+  }
   }, []);
 
   const checkStatus = async (e: any) => {
@@ -35,10 +40,10 @@ getUserData();
     querySnapshot.forEach((doc) => {
       if (doc.data().email === loginemail) {
         userData.push({
-            email: doc.data().email, // Add email property
-            displayName: doc.data().displayName, // Add displayName property
-            password: doc.data().password, // Add password property
-            photoURL: doc.data().photoURL, // Add photoURL property
+            email: doc.data().email,
+            displayName: doc.data().displayName, 
+            password: doc.data().password, 
+            photoURL: doc.data().photoURL, 
             usertype: doc.data().usertype,
             emailVerified: doc.data().emailVerified,
         });
@@ -46,13 +51,13 @@ getUserData();
     });
   
     if (userData.length > 0) {
-      const isAdmin = userData.some((user) => user.usertype === "Admin");
+      const isAdmin = userData.some((user) => user.usertype === "admin");
       console.log(isAdmin);
       if (isAdmin) {
         const email = loginemail;
         const password = loginpassword;
         await signInWithEmailAndPassword(auth, email, password);
-        navigate("/admin/chat");
+        navigate("/admin/dashboard");
       } else {
         alert("The provided email does not belong to an admin user.");
       }
@@ -64,8 +69,18 @@ getUserData();
 
   return (
     <div className='container'>
-      <div>
-        <input />
+      <span className='login-header'>SKILLS MAPPING SYSTEM</span>
+      <div className='login-input-container'>
+        <input 
+          placeholder='email address'
+          onChange={(e) => setloginEmail(e.target.value)}
+        />
+        <input 
+          placeholder='password'
+          onChange={(e) => setloginPassword(e.target.value)}
+        />
+        <br/>
+        <button type = 'submit'  onClick={checkStatus}>Sign In</button>
       </div>
     </div>
   )
