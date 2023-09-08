@@ -9,9 +9,162 @@
   overflow: auto;
 }
 
+.stats-wrapper {
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100vh;
+  overflow:scroll;
+  padding-top: 10%;
+}
+
+.stats-wrapper h1 {
+  font-weight: 700;
+  font-family: 'Montserrat';
+  margin-bottom: 2rem;
+}
+
+.stats-wrapper p {
+  font-family: 'Montserrat';
+  font-weight: 700;
+}
+
 .data-wrapper {
   display: flex;
   flex-direction: row;
   width: 80%;
   justify-content: space-between;
+}
+
+.bar-container svg {
+  width: 100%;
+  display: flex;
+}
+
+.legend1 {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-top: 20px;
+
+}
+
+.legend1 span {
+  display: flex;
+  flex-direction: row;
+}
+
+.legend1 div {
+  
+  background-color:#02B2AF;
+  width: 15px;
+  height: 15px;
+}
+
+.legend1 p {
+  display: flex;
+  font-size: 14px;
+  margin-left: 5px;
+  flex-direction: row;
+  font-family: 'Montserrat';
+  font-weight: 500;
+}
+
+.legend1 h4 {
+  margin-left: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-weight: 700;
+}
+
+.legend2 {
+   display: flex;
+   justify-content: space-between;
+    width: 80%;
+}
+
+.legend2 span {
+  display: flex;
+  flex-direction: row;
+}
+
+.legend2 div {
+  
+  background-color: #2E96FF;
+  width: 15px;
+  height: 15px;
+}
+
+.legend2 p {
+  display: flex;
+  font-size: 14px;
+  margin-left: 5px;
+  flex-direction: row;
+  font-family: 'Montserrat';
+  font-weight: 500;
+}
+
+.legend2 h4 {
+  margin-left: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-weight: 700;
+}
+
+.legend3 {
+   display: flex;
+   justify-content: space-between;
+   width: 80%;
+}
+
+.legend3 span {
+  display: flex;
+  flex-direction: row;
+}
+
+.legend3 div {
+  
+  background-color: #B800D8;
+  width: 15px;
+  height: 15px;
+}
+
+.legend3 p {
+  display: flex;
+  font-size: 14px;
+  margin-left: 5px;
+  flex-direction: row;
+  font-family: 'Montserrat';
+  font-weight: 500;
+}
+
+.legend3 h4 {
+  margin-left: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-weight: 700;
+}
+
+.stats-inner-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.stats-inner-wrapper {
+  margin-top: 10px;
+   display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.data-conatiner {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px
+
 }

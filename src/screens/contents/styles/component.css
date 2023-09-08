@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #6fe662;
+  background-color: #3FDD2E;
   color: #fff;
   position: fixed; /* Change this to "fixed" */
   top: 0;
@@ -114,6 +114,11 @@
   border-radius: 10px;
 }
 
+.stats-container {
+    width: 600px;
+    box-shadow: 0px 2px 5px #808080;
+}
+
 .progress-wrapper {
   width: 100%;
   text-align: left;
@@ -140,13 +145,67 @@
   align-items: center;
   margin: 5px 0;
   padding: 5px 20px;
+  border-bottom: 1px solid #ccc;
 }
-
 .progress-cell {
   flex: 1;
   font-family: 'Montserrat';
   font-size: 13px;
   display: flex;
+  align-items: center;
+  padding: 2px;
+  margin-right: 10px;
+}
+
+.outer-div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust the gap as needed */
+}
+
+/* Styling for each item */
+.group-div {
+  flex-direction: row;
+  display: flex;
+  width: 100%;
+}
+
+.skill-span {
+  display: block;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  font-size: 10px;
+}
+
+.stats-cell {
+  flex: 1;
+  font-family: 'Montserrat';
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px;
+  margin-right: 10px;
+  text-align: left;
+}
+
+
+.wrap-to-column {
+  display: block; /* Display skills in a column */
+  margin-top: 10px; /* Add spacing between skills in a column */
+}
+
+.stats-cell:nth-child(3n) {
+  flex-direction: column;
+}
+
+.header-cell {
+   flex: 1;
+  font-family: 'Montserrat';
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 2px;
   margin-right: 10px;
@@ -178,4 +237,15 @@
   color: #fff;
   padding-right: 5px;
   margin-right: 2rem;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.stat-header{
+  font-weight: 700;
 }
