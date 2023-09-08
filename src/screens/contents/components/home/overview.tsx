@@ -1,8 +1,36 @@
-import React from 'react'
+import { log } from 'console';
+import { fetchemployerdata, fetchuserdata } from '../../../../firebase/function';
+import React, { useEffect, useState } from 'react'
+import { DataItem, employerdata, freelancedata } from 'types/interfaces';
 
-type Props = {}
+type Props = {
 
-export default function DataSheet({}: Props) {
+  jobs: number,
+
+}
+
+export default function DataSheet({jobs}: Props) {
+
+  const [employerdata, setemployerdata] = useState<employerdata[]>([])
+  const [freelancedata, setfreelancedata] = useState<freelancedata[]>([])
+
+  useEffect(() => {
+      
+      const fetchemployer = async() => {
+      const thisdata: employerdata[] = await fetchemployerdata() || [];
+      console.log(thisdata);
+      setemployerdata(thisdata)
+      }
+     const fetchuser = async() => {
+      const thisdata: freelancedata[] = await fetchuserdata() || [];
+      console.log(thisdata);
+      setfreelancedata(thisdata)
+      }
+
+      fetchemployer()
+      fetchuser()
+  },[])
+  
   return (
     <div className='overview-container'>
       <div className='data-header'>
@@ -14,7 +42,7 @@ export default function DataSheet({}: Props) {
             Total Jobs:
           </span>
           <p>
-          {30}
+          {jobs}
           </p>
         </div>
        <div className='tab-wrapper'>
@@ -22,7 +50,7 @@ export default function DataSheet({}: Props) {
             Total Employee:
           </span>
           <p>
-          {30}
+          {freelancedata.length}
           </p>
         </div>
         <div className='tab-wrapper'>
@@ -30,7 +58,7 @@ export default function DataSheet({}: Props) {
             Total Employer:
           </span>
           <p>
-          {30}
+          {employerdata.length}
           </p>
         </div>
       </div>
