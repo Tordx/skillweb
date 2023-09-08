@@ -1,7 +1,7 @@
 import { collection, getDocs } from '@firebase/firestore';
 import { auth, db } from '../../../firebase';
 import React, { useContext, useEffect, useState } from 'react'
-import { userdata } from 'types/interfaces';
+import { admindata } from 'types/interfaces';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import '../styles/auth.css'
@@ -35,7 +35,7 @@ getUserData();
   const checkStatus = async (e: any) => {
     e.preventDefault()
     const querySnapshot = await getDocs(collection(db, "user"));
-    const userData: userdata[] = [];
+    const userData: admindata[] = [];
   
     querySnapshot.forEach((doc) => {
       if (doc.data().email === loginemail) {
