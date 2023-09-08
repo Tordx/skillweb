@@ -31,3 +31,21 @@ button {
   font-weight: 700;
   color: white;
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* For WebKit-based browsers (Chrome, Safari, etc.) */
+*::-webkit-scrollbar {
+  width: 6px; /* Adjust the width as needed */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent; /* Make the track background transparent */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Make the thumb (the draggable part) transparent */
+}
