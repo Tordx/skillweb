@@ -30,7 +30,7 @@ getUserData();
   if(currentUser != null){
     navigate("/admin/dashboard");
   }
-  }, []);
+  }, [currentUser]);
 
   const checkStatus = async (e: any) => {
     e.preventDefault()
@@ -78,6 +78,12 @@ getUserData();
         <input 
           placeholder='password'
           onChange={(e) => setloginPassword(e.target.value)}
+          type= 'password'
+            onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              checkStatus(e);
+            }
+          }}
         />
         <br/>
         <button type = 'submit'  onClick={checkStatus}>Sign In</button>

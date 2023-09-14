@@ -11,9 +11,7 @@ import StatsData from 'screens/contents/components/stats/statsdata'
 import Status from 'screens/contents/components/stats/status'
 import { DataItem, JobItem, application, applicationdata, employerdata, freelancedata, jobdata, statusdata } from 'types/interfaces'
 
-type Props = {}
-
-export default function Statistics({}: Props) {
+export default function Statistics() {
 
   const [employerData, setEmployerData] = useState<employerdata[]>([]);
   const [freelanceData, setFreelanceData] = useState<freelancedata[]>([]);
@@ -53,25 +51,20 @@ export default function Statistics({}: Props) {
 const fetchApplications = async () => {
   const thisData: applicationdata[] = await fetchapplication() || [];
 
-  // Use reduce to count items with the same jobid and jobtitle
   const countedData: application[] = thisData.reduce((acc, currentItem) => {
-    // Find the index of the current item in the accumulator array
     const index = acc.findIndex(
       (item: application) => item.jobid === currentItem.jobid && item.jobtitle === currentItem.jobtitle
     );
-
-    // If the item with the same jobid and jobtitle is found, increment its value
-if (index !== -1) {
-      (acc[index] as application).value++; // Type assertion to ensure TypeScript recognizes it as 'application'
-    } else {
-      // If not found, add a new entry to the accumulator array
-      const newEntry: application = {
-        jobid: currentItem.jobid,
-        jobtitle: currentItem.jobtitle,
-        value: 1,
-      };
-      acc.push(newEntry);
-    }
+    if (index !== -1) {
+          (acc[index] as application).value++;
+        } else {
+          const newEntry: application = {
+            jobid: currentItem.jobid,
+            jobtitle: currentItem.jobtitle,
+            value: 1,
+          };
+          acc.push(newEntry);
+        }
 
     return acc;
   }, [] as application[]);
@@ -121,8 +114,16 @@ if (index !== -1) {
           <Barchart/>
         </div>
         <div className='data-conatiner'>
-          <StatsData data={filtereddata} title = 'Available Jobs'/>
-          <SkillsData data = {applicationdata} title = 'Most jobs wanted'/>
+          <div className='middleinfo-container'>
+            <h1>Job Vacancies</h1>
+            <p>Total Jobs Available: {jobdata.length}</p>
+            <StatsData data={filtereddata} title = 'Available Jobs'/>
+          </div>  
+          <div className='middleinfo-container'>
+            <h1>Applicant's Skills</h1>
+            <p>Total Skills: {freelanceData.length}</p>
+            <SkillsData data = {applicationdata} title = 'Most jobs wanted'/>
+           </div>
         </div>
       </div>
     </div>
