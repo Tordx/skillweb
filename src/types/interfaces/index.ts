@@ -21,7 +21,7 @@ export interface admindata  {
   displayName: string,
   password: string,
   photoURL: string,
-  usertype: string;
+  userType: string;
   emailVerified: string;
 }
 

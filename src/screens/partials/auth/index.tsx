@@ -44,14 +44,14 @@ getUserData();
             displayName: doc.data().displayName, 
             password: doc.data().password, 
             photoURL: doc.data().photoURL, 
-            usertype: doc.data().usertype,
+            userType: doc.data().userType,
             emailVerified: doc.data().emailVerified,
         });
       }
     });
   
     if (userData.length > 0) {
-      const isAdmin = userData.some((user) => user.usertype === "admin");
+      const isAdmin = userData.some((user) => user.userType === "admin");
       console.log(isAdmin);
       if (isAdmin) {
         const email = loginemail;
