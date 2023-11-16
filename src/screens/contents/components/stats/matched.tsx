@@ -3,33 +3,47 @@ import React from 'react';
 type Props = {
   skills: string[];
   requirements: string[];
+  title: string;
 };
 
-export default function Matched({ skills, requirements }: Props) {
+export default function Matched({ skills, requirements, title }: Props) {
   const calculateMatches = () => {
-    const matchedSkills = skills.filter(skill => requirements.includes(skill));
-    const unmatchedSkills = skills.filter(skill => !requirements.includes(skill));
+    const matchedCount: { [key: string]: number } = {};
 
-    return {
-      matchedCount: matchedSkills.length,
-      unmatchedCount: unmatchedSkills.length,
-      totalCount: skills.length,
-    };
+    skills.forEach(skill => {
+      const count = requirements.filter(req => req.toLowerCase() === skill.toLowerCase()).length;
+      matchedCount[skill] = count;
+    });
+
+    // Sort the matchedCount object in descending order
+    const sortedMatches = Object.entries(matchedCount)
+      .sort(([, countA], [, countB]) => countB - countA)
+      .slice(0, 10); // Limit to 10 results
+
+    return Object.fromEntries(sortedMatches);
   };
 
-  const { matchedCount, unmatchedCount, totalCount } = calculateMatches();
+  const matchedCount = calculateMatches();
 
   return (
     <>
-      <span className='legend1'>
-        <p>Matched with jobs: </p> <h4>{matchedCount}</h4>
-      </span>
-      <span className='legend2'>
-        <p>No Matches with jobs:</p> <h4>{unmatchedCount}</h4>
-      </span>
-      <span className='legend2'>
-        <p>Total:</p>  <h4>{totalCount}</h4>
-      </span>
+      <div className='data-container skills-wrapper'>
+        <div className='progress-wrapper'>
+          <span className='progress-wrapper-header stat-header'>{title}</span>
+          <div className='progress-table'>
+            {Object.entries(matchedCount).map(([skill, count]) => (
+              <div key={skill} className='progress-row'>
+                <div className='progress-cell skills-text'>
+                  <span>{skill}</span>
+                </div>
+                <div className='progress-percent skills-text'>
+                  <span>{count}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </>
   );
 }

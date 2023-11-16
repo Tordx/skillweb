@@ -6,6 +6,7 @@ import Navbarmenu from 'screens/contents/components/gen/navigator/navbarmenu'
 import Data from 'screens/contents/components/home/data'
 import Barchart from 'screens/contents/components/stats/barchart'
 import Matched from 'screens/contents/components/stats/matched'
+import MatchedIndex from 'screens/contents/components/stats/matchedLength'
 import Overview from 'screens/contents/components/stats/overview'
 import SkillsData from 'screens/contents/components/stats/skillsdata'
 import StatsData from 'screens/contents/components/stats/statsdata'
@@ -64,9 +65,10 @@ export default function Statistics() {
 
         return accumulator;
       }, [] as string[]);
-
+    if(skills.length === 0 && competencies.length === 0){
     setskills(filteredSkillsData);
     setcompetencies(filteredCompetenciesData)
+    }
     };
 
     const fetchStatus = async () => {
@@ -133,6 +135,11 @@ const fetchjobdata = async () => {
 
       setCombinedRequirements(filteredSkillsData);
       setCombinedUserData(combinedUserData);
+    
+      console.log('whoops')
+
+  console.log(combinedUserData)
+  console.log(filteredSkillsData)
     }
   };
 
@@ -161,7 +168,7 @@ const fetchjobdata = async () => {
             <div className='stats-inner-wrapper'>
               <p>Skills and Competencies</p>
               {combinedUserData.length > 0 && combinedRequirements.length > 0 && (
-              <Matched skills={combinedUserData} requirements={combinedRequirements} />
+              <MatchedIndex skills={combinedUserData} requirements={combinedRequirements} />
               )}
             </div>
           </div>
@@ -171,7 +178,7 @@ const fetchjobdata = async () => {
         <div className='data-conatiner'>
           <div className='middleinfo-container'>
             <h1>Job Vacancies</h1>
-            <p>Total Jobs Available: {jobdata.length}</p>
+            <p>Total Jobs: {filtereddata.length}</p>
             <StatsData data={filtereddata} title = 'Available Jobs'/>
           </div>  
           <div className='middleinfo-container'>
@@ -191,6 +198,13 @@ const fetchjobdata = async () => {
             <p>All Job Seeker Competencies: {competencies.length}</p>
             <UserSkillsData data={competencies} title = 'Top 10 Competencies'/>
            </div>
+        </div>
+        <div className='data-conatiner'>
+          <div className='middleinfo-container'>
+            <h1>Matched Job with Skills and Competencies</h1>
+            <p>All Job Seeker Skills: {skills.length}</p>
+            <Matched skills={combinedUserData} requirements={combinedRequirements}  title = 'Top 10 Matched Data'/>
+          </div>
         </div>
       </div>
     </div>

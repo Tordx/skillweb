@@ -40,13 +40,8 @@ const accumulateDataByMonth = (data: any[], employment: boolean) => {
       const timestamp = item.timestamp.toDate();
       const month = timestamp.getMonth();
 
-      console.log(`Item: ${JSON.stringify(item)}`);
-      console.log(`Month: ${month}`);
-      console.log(`Employment Status: ${item.employment}`);
-
       if (item.employment === employment) {
         monthData[month] += 1; 
-        console.log(`Month Data After Increment: ${JSON.stringify(monthData)}`);
       }
     }
   });

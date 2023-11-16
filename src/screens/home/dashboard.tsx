@@ -23,17 +23,18 @@ export default function Home({}) {
       const thisdata: jobdata[] = await fetchdata("job-post")||[];
         console.log(thisdata.length)
         setjobdata(thisdata)
-      const resultArray: DataItem[] = thisdata.map((item, index) => ({
-        id: index, 
-        value: 1, 
-        name: item.jobtitle,
-      }));
+      const resultArray: DataItem[] = thisdata
+        .filter(item => item.status === true) 
+        .map((item, index) => ({
+          id: index, 
+          value: 1, 
+          name: item.jobtitle,
+        }));
       setfiltereddata(resultArray)
     }
 
       fetchjobdata()
   }, [])
-
 
   return (
     <div className='container'>
