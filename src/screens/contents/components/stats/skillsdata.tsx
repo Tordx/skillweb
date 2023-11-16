@@ -5,18 +5,19 @@ import { application } from 'types/interfaces';
 type Props = {
   data: application[];
   title: string;
+  limit?: number;
 };
 
-export default function SkillsData({ data, title }: Props) {
-
-  
+export default function SkillsData({ data, title, limit = 10 }: Props) {
+  const sortedData = [...data].sort((a, b) => b.value - a.value);
+  const limitedData = sortedData.slice(0, limit);
 
   return (
     <div className='data-container skills-wrapper'>
       <div className='progress-wrapper'>
         <span className='progress-wrapper-header stat-header'>{title}</span>
         <div className='progress-table'>
-          {data.map((item) => (
+          {limitedData.map((item) => (
             <div key={item.jobid} className='progress-row'>
               <div className='progress-cell skills-text'>
                 <span>{item.jobtitle}</span>

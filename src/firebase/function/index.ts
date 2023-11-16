@@ -18,6 +18,7 @@ import { collection, getDocs } from '@firebase/firestore'
         photoURL: doc.data().photoURL,
         qualification: doc.data().qualification,
         requirements: doc.data().requirements,
+        competencies: doc.data().competencies,
         scope: doc.data().scope,
         status: doc.data().status,
         timestamp: doc.data().timestamp,
@@ -61,46 +62,46 @@ export const fetchemployerdata = async() => {
   }
 }
 
-export const fetchuserdata = async() => {
-  try {
-  const querySnapshot = await getDocs(collection(db, 'user'))
-  const thisdata: freelancedata[] = []
-  querySnapshot.forEach((doc) => {
-    if(doc.data().usertype == 'freelance'){
-      thisdata.push({
-        CSE: doc.data().CSE,
-        Cert: doc.data().Cert,
-        ProfLi: doc.data().ProfLi,
-        SpeSkills: doc.data().SpeSkills,
-        address: doc.data().address,
-        contactnumber: doc.data().contactnumber,
-        dob: doc.data().dob,
-        email: doc.data().email,
-        emergencycontactname: doc.data().emergencycontactname,
-        emergencycontactnum: doc.data().emergencycontactnum,
-        fullname: doc.data().fullname,
-        gender: doc.data().gender,
-        highesteduc: doc.data().highesteduc,
-        jobTitle: doc.data().jobTitle,
-        nationality: doc.data().nationality,
-        photoURL: doc.data().photoURL,
-        readonlyelationship: doc.data().readonlyelationship,
-        uid: doc.data().uid,
-        username: doc.data().username,
-        usertype: doc.data().usertype,
-        employment: doc.data().employment,
-        employmenttype: doc.data().employmenttype,
-        timestamp: doc.data().timestamp,
-      })
-    }
-  });
+// export const fetchuserdata = async() => {
+//   try {
+//   const querySnapshot = await getDocs(collection(db, 'user'))
+//   const thisdata: freelancedata[] = []
+//   querySnapshot.forEach((doc) => {
+//     if(doc.data().usertype == 'freelance'){
+//       thisdata.push({
+//         CSE: doc.data().CSE,
+//         Cert: doc.data().Cert,
+//         ProfLi: doc.data().ProfLi,
+//         SpeSkills: doc.data().SpeSkills,
+//         address: doc.data().address,
+//         contactnumber: doc.data().contactnumber,
+//         dob: doc.data().dob,
+//         email: doc.data().email,
+//         emergencycontactname: doc.data().emergencycontactname,
+//         emergencycontactnum: doc.data().emergencycontactnum,
+//         fullname: doc.data().fullname,
+//         gender: doc.data().gender,
+//         highesteduc: doc.data().highesteduc,
+//         jobTitle: doc.data().jobTitle,
+//         nationality: doc.data().nationality,
+//         photoURL: doc.data().photoURL,
+//         readonlyelationship: doc.data().readonlyelationship,
+//         uid: doc.data().uid,
+//         username: doc.data().username,
+//         usertype: doc.data().usertype,
+//         employment: doc.data().employment,
+//         employmenttype: doc.data().employmenttype,
+//         timestamp: doc.data().timestamp,
+//       })
+//     }
+//   });
 
-  return thisdata
+//   return thisdata
 
-  } catch(error) {
-    console.error(error)
-  }
-}
+//   } catch(error) {
+//     console.error(error)
+//   }
+// }
 
 export const fetchstatus = async() => {
   try {
@@ -155,3 +156,42 @@ export const fetchapplication = async() => {
       console.error(error)
     }
 }
+
+
+export const fetchuserdata = async() => {
+  try {
+    const querySnapshot = await getDocs(collection(db, 'user'))
+    const thisdata: freelancedata[] = []
+    querySnapshot.forEach((doc) => {
+      thisdata.push({
+        username: doc.data().username,
+        fullname: doc.data().fullname,
+        firstname: doc.data().firstname,
+        middlename: doc.data().middlename,
+        lastname: doc.data().lastname,
+        suffix: doc.data().suffix,
+        photoURL: doc.data().photoURL,
+        email: doc.data().email,
+        dob: doc.data().dob,
+        gender: doc.data().gender,
+        skills: doc.data().skills,
+        competencies: doc.data().competencies,
+        files: doc.data().files,
+        salary: doc.data().salary,
+        contactnumber: doc.data().contactnumber,
+        Province: doc.data().Province,
+        City: doc.data().City,
+        Barangay: doc.data().Barangay,
+        Street: doc.data().Street,
+        usertype: doc.data().usertype,
+        uid: doc.data().uid,
+        employment: doc.data().employment
+      })
+    })
+
+    return thisdata;
+
+  } catch(error){
+    console.log(error)
+  }
+  }

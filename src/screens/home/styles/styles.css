@@ -31,9 +31,20 @@
 }
 
 .data-wrapper {
+  flex-direction: column;
   display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100vh;
+  overflow:scroll;
+  padding-top: 10%;
+  
+}
+
+.data-list {
+  width: 100%;
   flex-direction: row;
-  width: 80%;
+  display: flex;
   justify-content: space-between;
 }
 
@@ -149,7 +160,8 @@
 .stats-inner-container {
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: row;
 }
 

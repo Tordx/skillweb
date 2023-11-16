@@ -35,6 +35,7 @@ jobtitle: string,
 pertimeframe: string,
 photoURL: string,
 qualification: string,
+competencies: string[],
 requirements: string[],
 scope: string,
 status: boolean,
@@ -71,29 +72,34 @@ website: string,
 }
 
 export interface freelancedata {
-CSE: string,
-Cert: string,
-ProfLi: string,
-SpeSkills: string,
-address: address[],
-contactnumber: string,
-dob: string,
-email: string,
-emergencycontactname: string,
-emergencycontactnum: string,
-fullname: fullname[],
-gender: string,
-highesteduc: string,
-jobTitle: string,
-nationality: string,
-photoURL: string,
-readonlyelationship: string,
-uid: string,
-username: string,
-usertype: string,
-employment: boolean,
-employmenttype: boolean,
-timestamp: any,
+    username: string;
+    fullname: [
+      {firstname: string,},
+      {middlename: string;},
+      {lastname: string;},
+      {suffix: string;},
+    ]
+    firstname: string;
+    middlename: string;
+    lastname: string;
+    suffix: string;
+    usertype: 'freelance' | 'employer';
+    photoURL: string;
+    email: string;
+    dob: string; 
+    gender: string;
+    skills: string[];
+    competencies: string[];
+    files: string[];
+    salary: string; 
+    contactnumber: string;
+    Province: string
+    City: string;
+    Barangay: string
+    Street: string;
+    uid: string;
+    employment: boolean,
+   
 }
 
 export interface statusdata {

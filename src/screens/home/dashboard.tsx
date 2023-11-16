@@ -38,10 +38,13 @@ export default function Home({}) {
   return (
     <div className='container'>
       <Header menu={Navbarmenu}/>
-      <DataSheet jobs={jobdata.length} />
+
       <div className='data-wrapper'>
-        <Data data={filtereddata} title = 'Available jobs'/>
-        <Data data = {filtereddata} title = 'Most jobs wanted'/>
+      <DataSheet jobs={jobdata.length} />
+        <div className='data-list'>
+          <Data data={filtereddata} title = 'Available jobs'/>
+          <Data data = {filtereddata} title = 'Most jobs wanted'/>
+          </div>
       </div>
     </div>
   )

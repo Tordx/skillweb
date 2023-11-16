@@ -51,7 +51,7 @@ getUserData();
     });
   
     if (userData.length > 0) {
-      const isAdmin = userData.some((user) => user.userType === "admin");
+      const isAdmin = userData.some((user) => user.userType === "Admin");
       console.log(isAdmin);
       if (isAdmin) {
         const email = loginemail;

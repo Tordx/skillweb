@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { JobItem } from 'types/interfaces';
 
 type Props = {
@@ -7,6 +7,16 @@ type Props = {
 };
 
 export default function StatsData({ data, title }: Props) {
+  const initialItemsToShow = 10;
+  const [itemsToShow, setItemsToShow] = useState(initialItemsToShow);
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpand = () => {
+    setExpanded(!expanded);
+  };
+
+  const visibleData = expanded ? data : data.slice(0, itemsToShow);
+
   return (
     <div className="data-container stats-container">
       <div className="progress-wrapper">
@@ -23,7 +33,7 @@ export default function StatsData({ data, title }: Props) {
               <span>Skills required</span>
             </div>
           </div>
-          {data.map((item) => (
+          {visibleData.map((item) => (
             <div key={item.id} className="progress-row">
               <div className="stats-cell">
                 <span>{item.name}</span>
@@ -32,7 +42,7 @@ export default function StatsData({ data, title }: Props) {
                 <span>{item.job}</span>
               </div>
               <div className="stats-cell">
-               {item.skills &&
+                {item.skills &&
                   item.skills.reduce<string[][]>((groups, skill, index) => {
                     const groupIndex = Math.floor(index / 3);
                     if (!groups[groupIndex]) {
@@ -51,11 +61,17 @@ export default function StatsData({ data, title }: Props) {
                       </div>
                     </div>
                   ))}
-                </div>
+              </div>
             </div>
           ))}
         </div>
+        
       </div>
+      {data.length > initialItemsToShow && (
+          <button className="expand-button" onClick={handleExpand}>
+            {expanded ? 'Collapse' : 'Expand'}
+          </button>
+        )}
     </div>
   );
 }
