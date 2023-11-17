@@ -12,7 +12,11 @@ export default function MathcedSkills({ skills, requirements, title }: Props) {
 
     skills.forEach(skill => {
       const count = requirements.filter(req => req.toLowerCase() === skill.toLowerCase()).length;
-      matchedCount[skill] = count;
+
+      // Only add to matchedCount if the count is greater than 0
+      if (count > 0) {
+        matchedCount[skill] = count;
+      }
     });
 
     // Sort the matchedCount object in descending order
@@ -26,22 +30,22 @@ export default function MathcedSkills({ skills, requirements, title }: Props) {
   const matchedCount = calculateMatches();
 
   return (
-      <div className='data-container skills-wrapper'>
-        <div className='progress-wrapper'>
-          <h4 className='progress-wrapper-header stat-header'>{title}</h4>
-          <div className='progress-table'>
-            {Object.entries(matchedCount).map(([skill, count]) => (
-              <div key={skill} className='progress-row'>
-                <div className='progress-cell skills-text'>
-                  <span>{skill}</span>
-                </div>
-                <div className='progress-percent skills-text'>
-                  <span>{count}</span>
-                </div>
+    <div className='data-container skills-wrapper'>
+      <div className='progress-wrapper'>
+        <h4 className='progress-wrapper-header stat-header'>{title}</h4>
+        <div className='progress-table'>
+          {Object.entries(matchedCount).map(([skill, count]) => (
+            <div key={skill} className='progress-row'>
+              <div className='progress-cell skills-text'>
+                <span>{skill}</span>
               </div>
-            ))}
-          </div>
+              <div className='progress-percent skills-text'>
+                <span>{count}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+    </div>
   );
-}
+};

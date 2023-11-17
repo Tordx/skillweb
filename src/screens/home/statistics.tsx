@@ -29,6 +29,8 @@ export default function Statistics() {
   const [nonhired, setnonhired] = useState<statusdata[]>([]);
   const [skills, setskills] = useState<string[]>([])
   const [competencies, setcompetencies] = useState<string[]>([]);
+  const [eskills, seteskills] = useState<string[]>([])
+  const [ecompetencies, setecompetencies] = useState<string[]>([]);
   const [combinedUserData, setCombinedUserData] = useState<string[]>([])
   const [combinedRequirements, setCombinedRequirements] = useState<string[]>([])
 
@@ -121,7 +123,7 @@ const fetchjobdata = async () => {
   setfiltereddata(resultArray);
 
   if (skills.length > 0 && competencies.length > 0) {
-      const filteredSkillsData = thisdata.reduce((accumulator, item) => {
+      const filteredCombinedData = thisdata.reduce((accumulator, item) => {
         const jobCombine = [
           ...(item.requirements || []),
           ...(item.competencies || [])
@@ -131,16 +133,35 @@ const fetchjobdata = async () => {
 
         return accumulator;
       }, [] as string[]);
+
+      const filteredSkillsData = thisdata.reduce((accumulator, item) => {
+        const jobCombine = [
+            ...(item.requirements || []),
+        ].filter((element): element is string => typeof element === 'string');
+
+
+        accumulator.push(...jobCombine);
+
+        return accumulator;
+      }, [] as string[]);
+
+      const filteredCompetenciesData = thisdata.reduce((accumulator, item) => {
+        const jobCombine = [
+            ...(item.competencies || []),
+        ].filter((element): element is string => typeof element === 'string');
+
+        accumulator.push(...jobCombine);
+
+        return accumulator;
+      }, [] as string[]);
       
       const combinedUserData = skills.concat(competencies);
 
-      setCombinedRequirements(filteredSkillsData);
+      setCombinedRequirements(filteredCombinedData);
       setCombinedUserData(combinedUserData);
+      setecompetencies(filteredCompetenciesData)
+      seteskills(filteredSkillsData)
     
-      console.log('whoops')
-
-  console.log(combinedUserData)
-  console.log(filteredSkillsData)
     }
   };
 
@@ -178,37 +199,51 @@ const fetchjobdata = async () => {
         </div>
         <div className='data-conatiner'>
           <div className='middleinfo-container'>
-            <h1>Job Vacancies</h1>
+            <h2>Job Vacancies</h2>
             <p>Total Jobs: {filtereddata.length}</p>
             <StatsData data={filtereddata} title = 'Available Jobs'/>
           </div>  
           <div className='middleinfo-container'>
-            <h1>Applicant's Skills</h1>
+            <h2>Applicant's Skills</h2>
             <p>Total Skills: {freelanceData.length}</p>
             <SkillsData data = {applicationdata} title = 'Most jobs wanted'/>
            </div>
         </div>
+        <h1>Employers Data</h1>
         <div className='data-conatiner'>
           <div className='middleinfo-container'>
-            <h1>Top Skills</h1>
+            <h2>Top Seeking Skills</h2>
+            <p>All Seeking Skills: {skills.length}</p>
+            <UserSkillsData data={eskills} title = 'Top 10 Skills'/>
+          </div>  
+          <div className='middleinfo-container'>
+            <h2>Top Seeking Competencies</h2>
+            <p>All Seeking Competencies: {competencies.length}</p>
+            <UserSkillsData data={ecompetencies} title = 'Top 10 Competencies'/>
+           </div>
+        </div>
+        <h1>Job Seeker Data</h1>
+        <div className='data-conatiner'>
+          <div className='middleinfo-container'>
+            <h2>Top  Skills</h2>
             <p>All Job Seeker Skills: {skills.length}</p>
             <UserSkillsData data={skills} title = 'Top 10 Skills'/>
           </div>  
           <div className='middleinfo-container'>
-            <h1>Top Competencies</h1>
+            <h2>Top Seeking Competencies</h2>
             <p>All Job Seeker Competencies: {competencies.length}</p>
             <UserSkillsData data={competencies} title = 'Top 10 Competencies'/>
            </div>
         </div>
         <div className='data-conatiner'>
           <div className='middleinfo-container'>
-            <h1>Top Matched Skills  </h1>
-            <p>All Job Seeker Skills: {skills.length}</p>
+            <h2>Top Matched Skills  </h2>
+            <br/>
             <MathcedSkills skills={skills} requirements={combinedRequirements}  title = 'Top 10 Matched Data'/>
           </div>
           <div className='middleinfo-container'>
             <h2>Top Matched Comptencies</h2>
-            <p>All Job Seeker Comptencies: {competencies.length}</p>
+            <br/>
             <MatchedCompetencies skills={competencies} requirements={combinedRequirements}  title = 'Top 10 Matched Data'/>
           </div>
         </div>
