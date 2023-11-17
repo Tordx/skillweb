@@ -5,8 +5,9 @@ import { Header } from 'screens/contents/components/gen/header'
 import Navbarmenu from 'screens/contents/components/gen/navigator/navbarmenu'
 import Data from 'screens/contents/components/home/data'
 import Barchart from 'screens/contents/components/stats/barchart'
-import Matched from 'screens/contents/components/stats/matched'
 import MatchedIndex from 'screens/contents/components/stats/matchedLength'
+import MatchedCompetencies from 'screens/contents/components/stats/matchedcompetencies'
+import MathcedSkills from 'screens/contents/components/stats/matchedskills'
 import Overview from 'screens/contents/components/stats/overview'
 import SkillsData from 'screens/contents/components/stats/skillsdata'
 import StatsData from 'screens/contents/components/stats/statsdata'
@@ -44,7 +45,7 @@ export default function Statistics() {
       const unemployeddata = thisData.filter((item) => item.employment === false)
       setemployed(employeddata)
       setunemployed(unemployeddata)
-
+      const filterSkills = thisData.filter(item => item.skills)
       const filteredSkillsData = thisData.reduce((accumulator, item) => {
         const jobCombine = [
             ...(item.skills || []),
@@ -201,9 +202,14 @@ const fetchjobdata = async () => {
         </div>
         <div className='data-conatiner'>
           <div className='middleinfo-container'>
-            <h1>Matched Job with Skills and Competencies</h1>
+            <h1>Top Matched Skills  </h1>
             <p>All Job Seeker Skills: {skills.length}</p>
-            <Matched skills={combinedUserData} requirements={combinedRequirements}  title = 'Top 10 Matched Data'/>
+            <MathcedSkills skills={skills} requirements={combinedRequirements}  title = 'Top 10 Matched Data'/>
+          </div>
+          <div className='middleinfo-container'>
+            <h2>Top Matched Comptencies</h2>
+            <p>All Job Seeker Comptencies: {competencies.length}</p>
+            <MatchedCompetencies skills={competencies} requirements={combinedRequirements}  title = 'Top 10 Matched Data'/>
           </div>
         </div>
       </div>

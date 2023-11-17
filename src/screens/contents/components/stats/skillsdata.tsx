@@ -15,7 +15,7 @@ export default function SkillsData({ data, title, limit = 10 }: Props) {
   return (
     <div className='data-container skills-wrapper'>
       <div className='progress-wrapper'>
-        <span className='progress-wrapper-header stat-header'>{title}</span>
+        <h4 className='progress-wrapper-header stat-header'>{title}</h4>
         <div className='progress-table'>
           {limitedData.map((item) => (
             <div key={item.jobid} className='progress-row'>

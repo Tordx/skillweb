@@ -191,6 +191,12 @@
   margin-bottom: 10px;
 }
 
+.middleinfo-container h2 {
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: 'Montserrat';
+}
+
 .middleinfo-container p {
   font-weight: 400;
   margin-bottom: 20px;

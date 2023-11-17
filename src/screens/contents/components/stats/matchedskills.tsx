@@ -6,7 +6,7 @@ type Props = {
   title: string;
 };
 
-export default function Matched({ skills, requirements, title }: Props) {
+export default function MathcedSkills({ skills, requirements, title }: Props) {
   const calculateMatches = () => {
     const matchedCount: { [key: string]: number } = {};
 
@@ -26,10 +26,9 @@ export default function Matched({ skills, requirements, title }: Props) {
   const matchedCount = calculateMatches();
 
   return (
-    <>
       <div className='data-container skills-wrapper'>
         <div className='progress-wrapper'>
-          <span className='progress-wrapper-header stat-header'>{title}</span>
+          <h4 className='progress-wrapper-header stat-header'>{title}</h4>
           <div className='progress-table'>
             {Object.entries(matchedCount).map(([skill, count]) => (
               <div key={skill} className='progress-row'>
@@ -44,6 +43,5 @@ export default function Matched({ skills, requirements, title }: Props) {
           </div>
         </div>
       </div>
-    </>
   );
 }

@@ -20,7 +20,7 @@ export default function StatsData({ data, title }: Props) {
   return (
     <div className="data-container stats-container">
       <div className="progress-wrapper">
-        <span className="progress-wrapper-header stat-header">{title}</span>
+        <h4 className="progress-wrapper-header stat-header">{title}</h4>
         <div className="progress-table">
           <div className="progress-row header-row">
             <div className="header-cell">

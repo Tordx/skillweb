@@ -29,7 +29,7 @@ export default function UserSkillsData({ data, title }: Props) {
   return (
     <div className='data-container skills-wrapper'>
       <div className='progress-wrapper'>
-        <span className='progress-wrapper-header stat-header'>{title}</span>
+        <h4 className='progress-wrapper-header stat-header'>{title}</h4>
         <div className='progress-table'>
           {top10Words.map((word) => (
             <div key={word} className='progress-row'>
